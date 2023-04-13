@@ -5,6 +5,8 @@ import TopBar from "../Shared/TopBar";
 import { ServerAPI } from "../API/ServerAPI";
 import ModalImage from "react-modal-image";
 import AuthUser from "../Hooks/AuthUser";
+import Swal from "sweetalert2"
+
 
 const UserIdentity = () => {
   const { userInfo } = AuthUser()
@@ -33,7 +35,39 @@ const UserIdentity = () => {
   }, [userInfo])
 
 
-
+  // Delete Identity Information By username
+  const handleDelete = (username) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to delete this information?",
+      icon: "warning",
+      confirmButtonText: "Yes ✔",
+      showCancelButton: true,
+      confirmButtonColor: "#374151",
+      background: "#1f2937",
+      color: "#fff",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const url = `${ServerAPI}/identity/${username}`;
+        fetch(url, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            Swal.fire({
+              title: `${res?.status}`,
+              text: `${res?.message}`,
+              icon: `${res?.icon}`,
+              confirmButtonText: `${res?.confirmButtonText}`,
+              confirmButtonColor: "#374151",
+              background: "#1f2937",
+              color: "#fff",
+            });
+            window.location.reload()
+          })
+      }
+    });
+  };
   return (
     <>
       {loading ? (
@@ -54,6 +88,7 @@ const UserIdentity = () => {
                       <th className="w-40 text-start border border-primary p-1">Phone</th>
                       <th className="w-40 text-start border border-primary p-1">Whatsapp</th>
                       <th className="w-40 text-start border border-primary p-1">Voter ID Card</th>
+                      <th className="w-40 text-start border border-primary p-1">Delete</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -70,6 +105,7 @@ const UserIdentity = () => {
                           large={d?.img}
                           className="h-20 w-20"
                         /></td>
+                      <td className="w-40 text-start border border-primary p-1"><button onClick={() => handleDelete(d?.username)} className="bg-primary text-white rounded px-5 py-2">Delete</button></td>
                     </tr>
                   </tbody>
                 </table>

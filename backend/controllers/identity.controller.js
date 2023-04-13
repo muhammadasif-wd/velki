@@ -1,4 +1,4 @@
-const { createIdentityService, getIdentityService } = require("../service/identity.service");
+const { createIdentityService, getIdentityService, deleteIdentityByUsername } = require("../service/identity.service");
 const { logIn } = require("./user.controller");
 
 
@@ -15,16 +15,15 @@ exports.getIdentity = async (req, res) => {
     } catch (error) {
         res.status(400).json({
             status: "failed",
-            message: "Sorry! 😥 your Data Couldn't be Submitted"
+            message: "Sorry! 😥 your Data Couldn't be Fetched"
         })
     }
 }
 // Get function create a username
 exports.getIdentityByUsername = async (req, res, next) => {
-    const userInfo = req.query
-    console.log(userInfo);
+    const { username } = req.query
     try {
-        const getUserData = await getIdentityByUsername(id);
+        const getUserData = await getIdentityByUsername(username);
         res.status(200).json({
             status: "success",
             message: "WoW! 😮 Successfully your Identity Fetched",
@@ -33,7 +32,7 @@ exports.getIdentityByUsername = async (req, res, next) => {
     } catch (error) {
         res.status(400).json({
             status: "failed",
-            message: "Sorry! 😥 your Data Couldn't be Submitted"
+            message: "Sorry! 😥 your Data Couldn't be Fetched"
         })
     }
 };
@@ -56,3 +55,25 @@ exports.createIdentity = async (req, res) => {
     }
 
 }
+
+// Delete function filter by a username
+exports.deleteIdentity = async (req, res) => {
+    const { username } = req.params
+    try {
+        const deleteUserIdentity = await deleteIdentityByUsername(username);
+        res.status(200).json({
+            status: "success",
+            message: "WoW! 😮 Successfully your Identity Deleted",
+            icon: "success",
+            confirmButtonText: "Thank you!",
+            data: deleteUserIdentity
+        })
+    } catch (error) {
+        res.status(400).json({
+            status: "failed",
+            message: "Sorry! 😥 your Data Couldn't be Deleted",
+            icon: "error",
+            confirmButtonText: "Try again!",
+        })
+    }
+};

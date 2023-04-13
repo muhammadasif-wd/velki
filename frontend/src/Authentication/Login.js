@@ -32,7 +32,7 @@ const Login = () => {
         if (res?.data?.status === "success") {
           Swal.fire({
             title: "Success!",
-            text: "Welcome to genzam bank!",
+            text: "Welcome to our website!",
             icon: "success",
             confirmButtonText: "Thank you!",
             confirmButtonColor: "#374151",

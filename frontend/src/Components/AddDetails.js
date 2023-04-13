@@ -101,6 +101,7 @@ const AddDetails = () => {
       });
     }
   };
+
   return (
     <section>
       {loading ? (
@@ -240,7 +241,7 @@ const AddDetails = () => {
                   </small>
                 </div>
               </div>
-              {identityData?.length < 0 ? <input
+              {identityData?.length <= 0 ? <input
                 type="submit"
                 value="Submit"
                 className="border border-dark/20 drop-shadow-xl cursor-pointer bg-dark/5 rounded-md py-2"
