@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Loader from "../Shared/Loader";
 import TopBar from "../Shared/TopBar";
 import { ServerAPI } from "../API/ServerAPI";
@@ -9,6 +9,7 @@ import Swal from "sweetalert2"
 
 
 const UserIdentity = () => {
+  const navigate = useNavigate()
   const { userInfo } = AuthUser()
   //loading implement
   const [loading, setLoading] = useState(true);
@@ -63,7 +64,7 @@ const UserIdentity = () => {
               background: "#1f2937",
               color: "#fff",
             });
-            window.location.reload()
+            navigate("user-details-add")
           })
       }
     });

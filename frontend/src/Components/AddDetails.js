@@ -5,8 +5,10 @@ import { ServerAPI } from "../API/ServerAPI";
 import Swal from "sweetalert2";
 import AuthUser from "../Hooks/AuthUser";
 import { fileUpload } from "../Hooks/fileUpload";
+import { useNavigate } from "react-router-dom";
 
 const AddDetails = () => {
+  const navigate = useNavigate()
   // get user info
   const { userInfo } = AuthUser()
   const [uploadFile, setUploadFile] = useState([]);
@@ -42,22 +44,22 @@ const AddDetails = () => {
     }, 1000);
   });
   // Function
-  const handleAddUserDetails = (e) => {
+  const handleAddUserDetails = async (e) => {
     e.preventDefault();
     const name = e?.target?.name?.value;
     const date = e?.target?.date?.value;
     const address = e?.target?.address?.value;
     const number = e?.target?.number?.value;
     const whatsapp = e?.target?.whatsapp?.value;
-    const userRole = userInfo?.role
     const username = userInfo?.username
+    const role = userInfo?.role
     const img = uploadFile;
-    const data = { name, date, address, number, whatsapp, userRole, username, img };
+    const data = { name, date, address, number, whatsapp, username, role, img };
     console.log(data);
 
     if (img?.length > 0) {
       // Post identity Data in database
-      fetch(`${ServerAPI}/identity`, {
+      await fetch(`${ServerAPI}/identity`, {
         method: "POST",
         headers: {
           'content-type': 'application/json',
@@ -77,6 +79,7 @@ const AddDetails = () => {
               background: "#1f2937",
               color: "#fff",
             });
+            navigate("/user-identity")
           } else {
             Swal.fire({
               title: `${res?.status}`,
@@ -235,7 +238,7 @@ const AddDetails = () => {
                     onChange={handleChangeUpload}
                   />
                   <small>
-                    (আপনাকে আপনার ভোটার =আইডি কার্ড / জন্মনিবন্ধ / পাসপোর্ট= এর
+                    (আপনাকে আপনার ভোটার আইডি কার্ড / জন্মনিবন্ধ / পাসপোর্ট= এর
                     ছবি তুলে এই খানে আপলোড করতে হবে) আপনি এড করার আগে সব তথ্য
                     ভাল মতো দেখে নিন। আপনি আর এডিট বা ডিলিট করতে পারবেন না।
                   </small>

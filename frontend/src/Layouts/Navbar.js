@@ -5,6 +5,7 @@ import Divider from "../Shared/Divider";
 import Sidebar from "./Sidebar";
 import AuthUser from "../Hooks/AuthUser";
 const Navbar = () => {
+  const { userInfo, logout } = AuthUser()
   // menubar state manage
   const [menu, setMenu] = useState(false);
   const windowWidth = useRef(window.innerWidth);
@@ -17,7 +18,7 @@ const Navbar = () => {
       setIsOpen(true);
     }
   }, [windowWidth]);
-  const { logout } = AuthUser()
+
 
   return (
     <div
@@ -89,27 +90,19 @@ const Navbar = () => {
             </button>
             {menu && (
               <div className="absolute -right-6 mt-4 z-50 w-80 bg-info/30 backdrop-blur-xl p-4 rounded-md">
-                <p>USER NAME</p>
+                <p className="font-bold uppercase">{userInfo?.username}</p>
                 <Divider />
                 <div className="flex gap-3 mt-3">
-                  <Link to={"user-details"}>
-                    <button className="bg-info/40 p-1 rounded">
-                      Personal data
-                    </button>
-                  </Link>
                   <Link to={"change-password"}>
                     <button className="bg-info/40 p-1 rounded">
                       Change password
                     </button>
                   </Link>
-                </div>
-                <div className="my-3">
-                  <Divider />
-                </div>
-                <div className="flex justify-end">
-                  <button onClick={logout} className="bg-primary/70 px-4 py-2 rounded-md">
-                    Logout
-                  </button>
+                  <div className="flex justify-end">
+                    <button onClick={logout} className="bg-primary/70 px-4 py-1 rounded-md">
+                      Logout
+                    </button>
+                  </div>
                 </div>
               </div>
             )}

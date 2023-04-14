@@ -5,12 +5,9 @@ const identitySchema = mongoose.Schema(
         username: {
             type: String,
             required: [true, "Please provide your username"],
-            unique: true
         },
-        userRole: {
+        role: {
             type: String,
-            required: [true, "Please provide your user type"],
-            unique: true
         },
         name: {
             type: String,
@@ -24,8 +21,6 @@ const identitySchema = mongoose.Schema(
         },
         address: {
             type: String,
-            required: [true, "Please provide your current address"],
-            unique: true
         },
         number: {
             type: String,
@@ -44,7 +39,6 @@ const identitySchema = mongoose.Schema(
     },
     { timestamps: true }
 );
-
 
 const Identity = mongoose.model("Identity", identitySchema)
 module.exports = Identity;

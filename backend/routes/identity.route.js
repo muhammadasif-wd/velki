@@ -1,6 +1,5 @@
 const express = require("express")
 const identityController = require("../controllers/identity.controller")
-// const verifyToken = require("../middlewares/verifyToken")
 const router = express.Router()
 
 router.get("/", identityController.getIdentity);

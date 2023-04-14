@@ -10,7 +10,7 @@ const Login = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 500);
   }, []);
   const { http, setToken, getToken } = AuthUser();
   const navigate = useNavigate();
