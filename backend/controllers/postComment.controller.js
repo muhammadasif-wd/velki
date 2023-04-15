@@ -1,12 +1,11 @@
-const { createIdentityService, getIdentityService, deleteIdentityByUsername } = require("../service/identity.service");
-const { logIn } = require("./user.controller");
+const { getPostCommentService, getUserIDServiceByUsername, createPostCommentService,  deletePostCommentById } = require("../service/postComment.service");
 
 
 // Get function create
-exports.getIdentity = async (req, res) => {
+exports.getPostCommentController = async (req, res) => {
     try {
         const filters = { ...req.query };
-        const identity = await getIdentityService(filters);
+        const identity = await getPostCommentService(filters);
         res.status(200).json({
             status: "success",
             message: "WoW! 😮 Successfully your Identity Fetched",
@@ -20,10 +19,10 @@ exports.getIdentity = async (req, res) => {
     }
 }
 // Get function create a username
-exports.getIdentityByUsername = async (req, res, next) => {
+exports.getPostCommentControllerByUsername = async (req, res, next) => {
     const { username } = req.query
     try {
-        const getUserData = await getIdentityByUsername(username);
+        const getUserData = await getUserIDServiceByUsername(username);
         res.status(200).json({
             status: "success",
             message: "WoW! 😮 Successfully your Identity Fetched",
@@ -39,9 +38,9 @@ exports.getIdentityByUsername = async (req, res, next) => {
 
 
 // Post function create
-exports.createIdentity = async (req, res) => {
+exports.createPostCommentController = async (req, res) => {
     try {
-        const newIdentity = await createIdentityService(req.body)
+        const newIdentity = await createPostCommentService(req.body)
         res.status(200).json({
             status: "success",
             message: "WoW! 😮 Successfully your Identity Submitted",
@@ -50,17 +49,18 @@ exports.createIdentity = async (req, res) => {
     } catch (error) {
         res.status(400).json({
             status: "failed",
-            message: "Sorry! 😥 your Data Couldn't be Submitted || Please check your details again!"
+            message: "Sorry! 😥 your Data Couldn't be Submitted"
         })
     }
 
 }
 
 // Delete function filter by a username
-exports.deleteIdentity = async (req, res) => {
-    const { username } = req.params
+exports.deletePostCommentById = async (req, res) => {
+    const { id } = req.params
+
     try {
-        const deleteUserIdentity = await deleteIdentityByUsername(username);
+        const deleteUserIdentity = await deletePostCommentById(id);
         res.status(200).json({
             status: "success",
             message: "WoW! 😮 Successfully your Identity Deleted",
