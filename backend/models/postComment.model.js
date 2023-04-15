@@ -4,7 +4,7 @@ const PostCommentSchema = mongoose.Schema(
     {
         name: {
             type: String,
-            required: [true, "Please provide your lottery name"]
+            required: [true, { message: "Please provide your lottery name" }]
         },
         number: {
             type: String,
