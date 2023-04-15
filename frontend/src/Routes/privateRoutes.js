@@ -22,7 +22,7 @@ const privateRoutes = [
   { path: "user-id/user-id-add", Component: AddUserID },
   { path: "user-comments/user-comments-post-add", Component: CommentPost },
   { path: "user-comments/:id", Component: CommentPostInformation },
-  { path: "user-result/user-result-single", Component: SingleResult },
+  { path: "user-result/:id", Component: SingleResult },
   { path: "change-password", Component: ChangePassword },
 ];
 export default privateRoutes;

@@ -17,7 +17,7 @@ const ChangePassword = () => {
         <div>
           <h1>Change Password</h1>
           <form action="">
-            <div className="flex flex-col gap-2 border border-dark/50 rounded-md w-1/2 mt-20 p-5">
+            <div className="flex flex-col gap-2 border border-dark/50 rounded-md md:w-1/2 mt-20 p-5">
               <p className="text-2xl text-center py-3">Change Password</p>
               <input
                 type="password"

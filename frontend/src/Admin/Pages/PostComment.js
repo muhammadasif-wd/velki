@@ -9,7 +9,8 @@ const PostComment = () => {
         const name = e?.target?.name?.value
         const number = e?.target?.number?.value
         const code = e?.target?.code?.value
-        const data = { name, number, code }
+        const link = e?.target?.link?.value
+        const data = { name, number, code, link }
         // Post identity Data in database
         fetch(`${ServerAPI}/post-comment`, {
             method: "POST",
@@ -47,7 +48,6 @@ const PostComment = () => {
     }
     return (
         <div>
-
             <form action="" className='flex flex-col gap-3' onSubmit={handlePostComment}>
                 <div className="flex justify-between items-center">
                     <h1 className="text-4xl font-bold text-dark">Post And Comments...</h1>

@@ -82,8 +82,8 @@ const UserComments = () => {
           <TopBar name={"Post Comments"} />
           {commentData?.map(d => {
             return (
-              <div key={d?._id}>
-                <table className="table-auto">
+              <div key={d?._id} className="overflow-auto">
+                <table className="table-fixed">
                   <thead>
                     <tr>
                       <th className="w-40 text-start border border-primary p-1">ID</th>

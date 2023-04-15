@@ -19,7 +19,26 @@ const Navbar = () => {
     }
   }, [windowWidth]);
 
+  const menuRef = useRef(null);
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
 
+  const handleClick = () => {
+    setMenuIsOpen(!menuIsOpen);
+  };
+
+  const handleClickOutside = (event) => {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setMenuIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
   return (
     <div
       className={`fixed inset-0 overflow-auto ${isOpen ? "z-index-plus" : "z-index-minus"
@@ -75,7 +94,10 @@ const Navbar = () => {
           </button>
           <div className="relative">
             <button onClick={() => setMenu(!menu)}>
-              <svg
+
+            </button>
+            <div className="absolute -left-10 -mt-7 z-50 bg-info text-white rounded-md menu-container" ref={menuRef}>
+              <button onClick={handleClick}><svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="text-white rounded-full p-1 border-2 border-white"
                 width="40"
@@ -86,26 +108,26 @@ const Navbar = () => {
                   fill="currentColor"
                   d="M14 19.5c0-2 1.1-3.8 2.7-4.7c-1.3-.5-2.9-.8-4.7-.8c-4.4 0-8 1.8-8 4v2h10v-.5m5.5-3.5c-1.9 0-3.5 1.6-3.5 3.5s1.6 3.5 3.5 3.5s3.5-1.6 3.5-3.5s-1.6-3.5-3.5-3.5M16 8c0 2.2-1.8 4-4 4s-4-1.8-4-4s1.8-4 4-4s4 1.8 4 4Z"
                 />
-              </svg>
-            </button>
-            {menu && (
-              <div className="absolute -right-6 mt-4 z-50 w-80 bg-info/30 backdrop-blur-xl p-4 rounded-md">
-                <p className="font-bold uppercase">{userInfo?.username}</p>
-                <Divider />
-                <div className="flex gap-3 mt-3">
-                  <Link to={"change-password"}>
-                    <button className="bg-info/40 p-1 rounded">
-                      Change password
-                    </button>
-                  </Link>
-                  <div className="flex justify-end">
-                    <button onClick={logout} className="bg-primary/70 px-4 py-1 rounded-md">
-                      Logout
-                    </button>
+              </svg></button>
+              {menuIsOpen && (
+                <div className="menu relative -ml-[16rem] bg-info p-3 mt-3">
+                  <p className="font-bold uppercase">{userInfo?.username}</p>
+                  <Divider />
+                  <div className="flex gap-3 mt-3">
+                    <Link to={"change-password"}>
+                      <button className="bg-info/40 p-1 rounded">
+                        Change password
+                      </button>
+                    </Link>
+                    <div className="flex justify-end">
+                      <button onClick={logout} className="bg-primary/80 px-4 py-1 rounded-md">
+                        Logout
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </section>

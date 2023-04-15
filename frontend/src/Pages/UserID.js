@@ -75,7 +75,7 @@ const UserID = () => {
 
           {userIDData?.map(d => {
             return (
-              <div key={d?._id}>
+              <div key={d?._id} className="overflow-auto">
                 <table className="table-auto mt-2">
                   <thead>
                     <tr>

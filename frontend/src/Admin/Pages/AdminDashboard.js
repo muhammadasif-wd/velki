@@ -73,7 +73,7 @@ const AdminDashboard = () => {
                     <p className="mt-2 text-xl font-bold text-white">{users?.length}</p>
                 </div>
             </div>
-            <div className="overflow-scroll">
+            <div className="overflow-scroll h-96">
                 <table className="table-fixed w-full mt-5">
                     <thead className="w-full">
                         <tr>

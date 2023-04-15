@@ -61,7 +61,7 @@ const AdminSidebar = () => {
         </NavLink>
 
         <NavLink
-          to={`user-result`}
+          to={`lottery`}
           className={({ isActive }) =>
             isActive
               ? "bg-primary/50 rounded-md drop-shadow-xl text-white font-normal text-black py-3 hover:text-white px-3 hover:bg-primary/30 w-[90%] mx-auto"

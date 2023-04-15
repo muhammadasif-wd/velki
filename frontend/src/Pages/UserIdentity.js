@@ -78,7 +78,7 @@ const UserIdentity = () => {
           <TopBar name={"User Identity"} />
           {identityData?.map(d => {
             return (
-              <div key={d?._id}>
+              <div key={d?._id} className="overflow-auto">
                 <table className="table-auto">
                   <thead>
                     <tr>
