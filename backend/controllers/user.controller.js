@@ -1,7 +1,5 @@
 const User = require("../models/user.model");
 const bcrypt = require("bcryptjs");
-
-
 const {
   createSignUpService,
   findUserByUsername,
@@ -11,8 +9,9 @@ const {
   updateUserService,
   getUserPasswordService,
 } = require("../service/user.service");
-const { checkWithIdService } = require("../utils/checkWithID");
+
 const { generateToken } = require("../utils/token");
+const { checkWithIdService } = require("../utils/checkWithID");
 
 exports.singUp = async (req, res, next) => {
   try {
@@ -67,7 +66,7 @@ exports.logIn = async (req, res, next) => {
     //- generate token
 
 
-    
+
     const { password: pwd, ...others } = user.toObject();
 
     const token = generateToken(user);
@@ -238,7 +237,6 @@ exports.changePassword = async (req, res) => {
   const { id } = req.params;
   try {
     const incomingChangeData = req.body;
-
     const isIdAvailable = await checkWithIdService(id, User);
     if (!isIdAvailable) {
       return res.status(400).json({
@@ -247,21 +245,18 @@ exports.changePassword = async (req, res) => {
       });
     }
     const user = await getUserPasswordService(id);
-
     const isPasswordValid = bcrypt.compareSync(
-      incomingChangeData.oldPassword,
+      incomingChangeData.currentPassword,
       user.password
     );
-
     if (!isPasswordValid) {
       return res.status(401).json({
         status: "fail",
-        message: "Your old password is wrong.Please Try again!",
+        message: "Your current password is wrong.Please Try again!",
       });
     }
 
-    const newPassword = req.body.password;
-
+    const newPassword = req.body.newPassword;
     const passwordRegex = new RegExp(
       "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
     );
@@ -273,16 +268,7 @@ exports.changePassword = async (req, res) => {
     }
 
     const hashedPassword = bcrypt.hashSync(newPassword);
-
-    // const result = await updateUserService(id, req.body);
     const result = await updateUserService(id, { password: hashedPassword });
-
-    if (!result.modifiedCount) {
-      return res.status(400).json({
-        status: "fail",
-        message: "Password no changed.",
-      });
-    }
     res.status(200).json({
       status: "success",
       message: "Password Changed Successfully",

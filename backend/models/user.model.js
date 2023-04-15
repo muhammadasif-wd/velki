@@ -36,7 +36,8 @@ const userSchema = mongoose.Schema(
       default: "active",
     },
   },
-  { timestamps: true }
+  { timestamps: true },
+  { collection: "users" }
 );
 
 userSchema.pre("save", function (next) {
