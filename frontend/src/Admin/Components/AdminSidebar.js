@@ -36,35 +36,11 @@ const AdminSidebar = () => {
         </NavLink>
 
         <NavLink
-          to={`user-id`}
+          to={`post-comment`}
           className={({ isActive }) =>
             isActive
               ? "bg-primary/50 rounded-md drop-shadow-xl text-white font-normal text-black py-3 hover:text-white px-3 hover:bg-primary/30 w-[90%] mx-auto"
               : "font-normal py-3 hover:text-white px-3 hover:bg-primary/30 w-[90%] rounded-md mx-auto"
-          }
-        >
-          <div className="flex gap-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="currentColor"
-                d="M22 3H2c-1.09.04-1.96.91-2 2v14c.04 1.09.91 1.96 2 2h20c1.09-.04 1.96-.91 2-2V5a2.074 2.074 0 0 0-2-2m0 16H2V5h20v14m-8-2v-1.25c0-1.66-3.34-2.5-5-2.5c-1.66 0-5 .84-5 2.5V17h10M9 7a2.5 2.5 0 0 0-2.5 2.5A2.5 2.5 0 0 0 9 12a2.5 2.5 0 0 0 2.5-2.5A2.5 2.5 0 0 0 9 7m5 0v1h6V7h-6m0 2v1h6V9h-6m0 2v1h4v-1h-4"
-              />
-            </svg>
-            <p className="drop-shadow-2xl w-40 text-start">User ID </p>
-          </div>
-        </NavLink>
-        <NavLink
-          to={`user-comments`}
-          className={({ isActive }) =>
-            isActive
-              ? "bg-primary/50 rounded-md drop-shadow-xl text-white font-normal text-black py-3 hover:text-white px-3 hover:bg-primary/30 w-[90%] mx-auto"
-              : "font-normal text-white py-3 hover:text-white px-3 hover:bg-primary/30 w-[90%] mx-auto"
           }
         >
           <div className="flex gap-2">
@@ -80,9 +56,10 @@ const AdminSidebar = () => {
                 d="M7 13.5q.625 0 1.063-.438T8.5 12q0-.625-.438-1.063T7 10.5q-.625 0-1.063.438T5.5 12q0 .625.438 1.063T7 13.5Zm5 0q.625 0 1.063-.438T13.5 12q0-.625-.438-1.063T12 10.5q-.625 0-1.063.438T10.5 12q0 .625.438 1.063T12 13.5Zm5 0q.625 0 1.063-.438T18.5 12q0-.625-.438-1.063T17 10.5q-.625 0-1.063.438T15.5 12q0 .625.438 1.063T17 13.5ZM12 22q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Z"
               />
             </svg>
-            <p className="drop-shadow-2xl w-40 text-start">Post Comments </p>
+            <p className="drop-shadow-2xl w-40 text-start">Post Comment</p>
           </div>
         </NavLink>
+
         <NavLink
           to={`user-result`}
           className={({ isActive }) =>

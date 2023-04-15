@@ -14,7 +14,7 @@ const UserIdentity = () => {
     useEffect(() => {
         setTimeout(() => {
             setLoading(false);
-        }, 1000);
+        }, 500);
     });
     const handleSearchChange = (event) => {
         const search = event.target.value;
@@ -47,14 +47,14 @@ const UserIdentity = () => {
             {loading ? (
                 <Loader />
             ) : (
-                <div>
+                <div className="md:h-[82vh] md:overflow-auto my-5">
                     <form action="">
                         <input onChange={handleSearchChange} type="search" name="search" id="search" placeholder="Search by username or number" className="placeholder:text-dark outline-none border rounded border-dark/50 p-1 w-full" />
                     </form>
                     {searchResult?.map((d, index) => {
                         return (
                             <div key={d?._id} className="overflow-auto">
-                                <table className="table-fixed w-full mt-1">
+                                <table className="table-fixed w-full mt-3">
                                     <thead>
                                         <tr>
                                             <th className="w-10 text-start border border-primary p-1">No</th>
