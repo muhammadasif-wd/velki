@@ -11,13 +11,12 @@ const {
 } = require("../service/user.service");
 
 const { generateToken } = require("../utils/token");
-const { checkWithIdService } = require("../utils/checkWithID");
+const { checkWithIdService } = require("../utils/checkWithId");
 
 exports.singUp = async (req, res, next) => {
   try {
     const user = await createSignUpService(req.body);
     //here we can make new profile
-
     res.status(200).json({
       status: "success",
       message: "successfully signup",

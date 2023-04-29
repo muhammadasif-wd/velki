@@ -8,7 +8,7 @@ exports.getIdentityService = async (filter) => {
 }
 
 // fetch user data a username
-exports.getIdentityByUsername = async (username) => {
+exports.getIdentityServiceByUsername = async (username) => {
     const result = await Identity.findOne({ username: username });
     return result;
 };
@@ -18,6 +18,6 @@ exports.createIdentityService = async (data) => {
     return identity;
 }
 // Delete Identity by a username
-exports.deleteIdentityByUsername = async (username) => {
+exports.deleteIdentityServiceByUsername = async (username) => {
     return await Identity.deleteOne({ username: username });
 };

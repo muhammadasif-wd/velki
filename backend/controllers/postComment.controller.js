@@ -1,4 +1,4 @@
-const { getPostCommentService, getUserIDServiceByUsername, createPostCommentService,  deletePostCommentById } = require("../service/postComment.service");
+const { getPostCommentService, getPostCommentServiceByUsername, createPostCommentService,  deletePostCommentById } = require("../service/postComment.service");
 
 
 // Get function create
@@ -22,7 +22,7 @@ exports.getPostCommentController = async (req, res) => {
 exports.getPostCommentControllerByUsername = async (req, res, next) => {
     const { username } = req.query
     try {
-        const getUserData = await getUserIDServiceByUsername(username);
+        const getUserData = await getPostCommentServiceByUsername(username);
         res.status(200).json({
             status: "success",
             message: "WoW! 😮 Successfully your Identity Fetched",
